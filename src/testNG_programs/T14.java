@@ -1,0 +1,47 @@
+package testNG_programs;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+//program for Assert
+public class T14 {
+
+	@Test
+	public void elorusLoginScript() throws InterruptedException {
+
+		System.setProperty("webdriver.chrome.driver", "D:\\Selenium\\Selenium\\drivers\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.manage().window().maximize();
+		driver.get("https://app.elorus.com/login/");
+
+		WebElement welcomePageText = driver.findElement(By.xpath("//h1[contains(text(),'Welcome')]"));
+//		 Assert.assertEquals(welcomePageText.isDisplayed(), true);
+		Assert.assertTrue(welcomePageText.isDisplayed());
+
+		driver.manage().window().maximize();
+		driver.findElement(By.name("email")).sendKeys("selenium92@gmail.com");
+		driver.findElement(By.name("password")).sendKeys("Selenium@098");
+		driver.findElement(By.xpath("//input[@value='SIGN IN']")).click();
+
+		Thread.sleep(2000);
+
+		String expectedHomePageTitle = "Elorus";
+		String expectedHomePageUrl = "https://excel.elorus.com/";
+
+		String actualHomePageTitle = driver.getTitle();
+		String actualHomePageurl = driver.getCurrentUrl();
+
+		// validates wheather the home page is loaded
+		Assert.assertEquals(actualHomePageTitle, expectedHomePageTitle);
+		Assert.assertEquals(actualHomePageurl, expectedHomePageUrl);
+
+		driver.quit();
+	}
+}
