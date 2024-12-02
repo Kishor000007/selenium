@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 //program for mouseover operation
-public class A1 {
+public class MouseHover {
 
 	public static void main(String[] args) throws AWTException {
 		 //sets the path for chromrdriver.exe//
